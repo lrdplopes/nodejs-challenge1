@@ -19,9 +19,9 @@ app.post("/repositories", (req, res) => {
 
   const project = {
     id: uuidv4(),
-    title: "Node.js - Challenge 1",
-    url: "https://github.com/lrdplopes/nodejs-challenge1",
-    techs: "Node.js",
+    title,
+    url,
+    techs,
     likes: 0,
   };
 
@@ -33,11 +33,11 @@ app.put("/repositories/:id", (req, res) => {
   const { id } = req.params;
   const { title, url, techs } = req.body;
 
-  const projectFindIndex = repositories.findIndex((project) => {
-    project.id === id;
-  });
+  const projectFindIndex = repositories.findIndex(
+    (project) => project.id === id
+  );
 
-  if (!projectFindIndex === -1) {
+  if (projectFindIndex === -1) {
     return res.status(400).json({ error: "Project doesn't exists" });
   }
 
